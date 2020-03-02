@@ -1,13 +1,8 @@
 <?php
-/*include 'model/dbh.class.php';
-
-$Object = new Dbh;
-$Object->connect();
-//print_r(PDO::getAvailableDrivers());
-
 /*
-* É recomendado que todo o carregamente seja feito apartir desse arquivo.
-*/ ?>
+ * É recomendado que todo o carregamente seja feito apartir desse arquivo.
+ */
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -21,12 +16,16 @@ $Object->connect();
 </head>
 
 <body>
+  <?php include 'navbar.php'; //adds the navigation bar on the top?>
+
   <div class="container">
     <div id="list" class="mx-auto">
-      <!--<h1 id="bahs">bah</h1>-->
+      
     </div>
   </div>
   <script src="index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

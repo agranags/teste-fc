@@ -1,26 +1,42 @@
 <?php
 require __DIR__ . '/../controller/medicoscontr.class.php';
 
-//echo __DIR__ . '/../controller/medicoscontr.class.php';
+$medicosContr = new MedicosContr();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $medicosContr = new MedicosContr();
-  $email = $_REQUEST['email'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //handles POST requests
+
   $nome = $_REQUEST['nome'];
   $senha = $_REQUEST['senha'];
   $endereco = $_REQUEST['endereco'];
 
-  $medicosContr->createMedico($email, $nome, $senha, $endereco);
-}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
+  
+  if (isset($_REQUEST['id'])) {   //handles editing an existing medico
+  
+    $medicosContr->editMedico($nome, $senha, $endereco, $_REQUEST['id']);
 
-} 
-else {
-  $medicosContr = new MedicosContr();
-  //$medicos = $medicosContr->getMedicos();
-  //echo var_export($medicos, true);
-  /*foreach ($medicos as $medico) {
-    echo $medico['nome'] . '<br />';
-  }*/
-  echo json_encode($medicosContr->getMedicos());
+  } else {  //handles creating a new medico
+  
+    $email = $_REQUEST['email'];
+    $medicosContr->createMedico($email, $nome, $senha, $endereco);
 
+  }
+
+} else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {   //handles removing a medico
+
+  if (isset($_REQUEST['id'])) {
+    $medicosContr->removeMedico($_REQUEST['id']);
+  }
+
+} else {  //handles GET requests
+
+  if (isset($_REQUEST['id'])) { //handles getting a specific medico
+
+    echo json_encode($medicosContr->getMedico($_REQUEST['id']));
+
+  } else {  //handles getting the complete list of medicos
+
+    echo json_encode($medicosContr->getMedicos());
+
+  }
 }

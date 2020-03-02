@@ -1,32 +1,33 @@
-/*document.write("This text comes from an external script.");
-document.getElementById("bahs").innerText = "123";
-document.getElementById("list").innerHTML= "new content";*/
 $.get("./api/medicos.php", function (data, status) {
-  
-  //document.write("abc");
   medicos = JSON.parse(data);
   medicos.map(listMedicos);
-  //alert("Data: " + data + "\nStatus: " + status);
 });
 
+//Lists the medicos on the screen using cards
 function listMedicos(medico) {
   id = medico.id;
   nome = medico.nome;
   endereco = medico.endereco_consultorio;
-  /*var html = `
-  <div class="card bg-info">
-    <div class="card-body text-center">
-      <h5 class="card-title">`+ nome + `</h5>
-      <p class="card-text">`+ endereco + `</p>
-    </div>
-  </div>`;*/
+
   var html = `
-  <div id=`+ id + ` class="card float-left" style="width: 18rem;">
+  <div id=`+ id + ` class="card float-left" style="width: 17rem;">
     <div class="card-body">
       <h5 class="card-title">`+ nome + `</h5>
       <p class="card-text">`+ endereco + `</p>
-      <a href="`+ id + `" class="btn btn-primary">Go somewhere</a>
+      <a href="./form.php?id=`+ id + `" class="btn btn-primary">Editar</a>
+      <a href="" class="btn btn-danger" onclick="removeMedico(`+ id + `)">Remover</a>
     </div>
   </div>`;
   document.getElementById("list").innerHTML += html;
+}
+
+//Calls the api to remove the selected medico
+function removeMedico(id) {
+  event.preventDefault()
+  $.ajax({
+    url: './api/medicos.php?id=' + id,
+    type: 'DELETE'
+  });
+  console.log(id);
+  window.location.href = "./";
 }

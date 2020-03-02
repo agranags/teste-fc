@@ -3,7 +3,7 @@ require __DIR__ . '/model/config-banco-dados.php';
 
 class Dbh
 {
-
+  //creates the connection to the database
   public function connect()
   {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
